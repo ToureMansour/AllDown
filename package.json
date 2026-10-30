@@ -1,0 +1,26 @@
+{
+  "name": "alldown",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AllDown - download public media from a link when the source allows it.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm run dev -w @alldown/api\" \"npm run dev -w @alldown/web\"",
+    "build": "npm run build -w @alldown/api && npm run build -w @alldown/web",
+    "start": "concurrently -n api,web -c yellow,cyan \"npm run start -w @alldown/api\" \"npm run start -w @alldown/web\"",
+    "lint": "npm run lint -w @alldown/api && npm run lint -w @alldown/web",
+    "typecheck": "npm run typecheck -w @alldown/api && npm run typecheck -w @alldown/web",
+    "test": "npm run test -w @alldown/api && npm run test -w @alldown/web",
+    "setup:engine": "npm run setup:engine -w @alldown/api",
+    "verify:engine": "npm run verify:engine -w @alldown/api",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}

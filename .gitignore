@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# binaries downloaded by scripts
+apps/api/bin/*
+!apps/api/bin/.gitkeep
+!apps/api/bin/.gitignore
+
+# temp files and logs
+*.log
+npm-debug.log*
+.tmp/
+tmp/
+coverage/
+.vitest/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# deployment
+.vercel/
