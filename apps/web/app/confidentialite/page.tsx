@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description:
     "Données traitées par AllDown, finalités, durées de conservation et droits des personnes.",
+  alternates: {
+    canonical: "/confidentialite",
+  },
 };
 
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;

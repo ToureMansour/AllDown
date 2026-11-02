@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Droits d'auteur",
   description:
     "Rappel des règles de droit d'auteur et procédure de signalement pour AllDown.",
+  alternates: {
+    canonical: "/droits",
+  },
 };
 
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;

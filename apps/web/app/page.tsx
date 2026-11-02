@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
+
 import { Downloader } from "@/components/downloader";
 import { Logo } from "@/components/logo";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (

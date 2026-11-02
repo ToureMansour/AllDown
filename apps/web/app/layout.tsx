@@ -3,42 +3,92 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import { SiteFooter } from "@/components/site-footer";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default: "AllDown — Vos médias. Un lien. Un téléchargement.",
-    template: "%s · AllDown",
-  },
-  description:
-    "Collez le lien de votre contenu et récupérez le fichier lorsque la source le permet. Simple, rapide et sans inscription.",
-  applicationName: "AllDown",
-  keywords: [
-    "télécharger une vidéo",
-    "téléchargeur vidéo",
-    "YouTube",
-    "TikTok",
-    "Instagram",
-    "Facebook",
-    "LinkedIn",
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      inLanguage: "fr-FR",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#webapplication`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Web",
+      browserRequirements: "Requires JavaScript",
+      inLanguage: "fr-FR",
+      isAccessibleForFree: true,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "EUR",
+      },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
   ],
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: SITE_KEYWORDS,
+  category: "multimedia",
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    siteName: "AllDown",
-    title: "AllDown — Vos médias. Un lien. Un téléchargement.",
-    description:
-      "Collez le lien de votre contenu et récupérez le fichier lorsque la source le permet. Sans inscription.",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   twitter: {
-    card: "summary",
-    title: "AllDown — Vos médias. Un lien. Un téléchargement.",
-    description:
-      "Collez le lien de votre contenu et récupérez le fichier lorsque la source le permet. Sans inscription.",
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
   },
 };
 
@@ -55,6 +105,10 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="flex min-h-dvh flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <a
           href="#contenu"
           className="sr-only z-[100] rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-ink focus:not-sr-only focus:absolute focus:left-4 focus:top-4"

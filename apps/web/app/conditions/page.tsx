@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Conditions d'utilisation",
   description:
     "Règles d'utilisation du service AllDown, usages interdits et limites de responsabilité.",
+  alternates: {
+    canonical: "/conditions",
+  },
 };
 
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
